@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Reddit for Nonnas</title>
+	</head>
+	<body>
+		{% for post in post_list %}
+			<li>
+				<input type="submit" value="↑">
+				<a href="/nonnas/{{ post.id }}/"> {{ post.title }}: {{ post.votes }} votes</a>
+			</li>
+		{% endfor %}
+	</body>
+</html>
