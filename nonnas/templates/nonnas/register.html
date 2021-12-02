@@ -6,11 +6,10 @@
 		<title>Reddit for Nonnas</title>
 	</head>
 	<body>
-		{% for post in post_list %}
 		<form method="POST">
 			{% csrf_token %}
-			{{form}}
+			{{ form.as_p }}
+			<button type="submit">register</button>
 		</form>
-		{% endfor %}
 	</body>
 </html>
