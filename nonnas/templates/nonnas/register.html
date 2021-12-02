@@ -6,8 +6,11 @@
 		<title>Reddit for Nonnas</title>
 	</head>
 	<body>
-		<p>{{ post.title }}: {{ post.votes }} votes</p>
-		<p>{{ post.content}}</p>
-		<a href="/nonnas/">Go Back</a>
+		{% for post in post_list %}
+		<form method="POST">
+			{% csrf_token %}
+			{{form}}
+		</form>
+		{% endfor %}
 	</body>
 </html>
