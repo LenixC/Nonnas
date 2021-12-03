@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 
-from .models import Post
+from .models import *
 
 def homepage(request):
     print(request.user)
@@ -58,4 +58,13 @@ def login_request(request):
     form = AuthenticationForm()
     return render(request,
                   "nonnas/login.html",
+                  {"form":form})
+
+def new_post(request):
+    if request.method == "POST":
+        pass
+
+    form = PostForm()
+    return render(request,
+                  "nonnas/new_post.html",
                   {"form":form})

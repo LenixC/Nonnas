@@ -9,4 +9,5 @@ urlpatterns = [
         path('register/', views.register, name='register'),
         path('logout/', views.logout_request, name='logout'),
         path('login/', views.login_request, name='login'),
+        path('new_post/', views.new_post, name='new_post'),
 ]
