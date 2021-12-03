@@ -1,13 +1,15 @@
 {% extends 'nonnas/header.html' %}
 
 {% block content %}
+	<a class="right">You're currently {{ user }} </a>
+	<br>
 	<div class="container">
 		{% for post in post_list %}
 		<form action="" method="POST">
 		{% csrf_token %}
 			<div class="card">
 				<button type="submit" class="cyan waves-effect wave-light btn"  name="post" id="post"  value="{{ post.id }}">↑</button>
-				<a href="/nonnas/{{ post.id }}/"> {{ post.title }}: {{ post.votes }} votes</a>
+				<a href="/nonnas/{{ post.id }}/"> {{ post.title }}: {{ post.votes }} upvotes</a>
 			</div>
 		</form>
 		{% endfor %}
