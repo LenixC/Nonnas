@@ -1,15 +1,11 @@
-<!DOCTYPE html>
+{% extends 'nonnas/header.html' %}
 
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Reddit for Nonnas</title>
-	</head>
-	<body>
+{% block content %}
+
 		<form method="POST">
 			{% csrf_token %}
 			{{ form.as_p }}
-			<button type="submit">register</button>
+			<button class="cyan waves-effect waves-light btn" type="submit">register</button>
 		</form>
-	</body>
-</html>
+
+{% endblock %}
