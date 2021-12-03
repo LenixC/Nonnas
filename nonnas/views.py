@@ -62,7 +62,13 @@ def login_request(request):
 
 def new_post(request):
     if request.method == "POST":
-        pass
+        form = PostForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            post = Post.objects.create(title = title,
+                                       content = content,)
+            return redirect("nonnas:homepage")
 
     form = PostForm()
     return render(request,
