@@ -5,8 +5,6 @@ from django.contrib.auth import logout, authenticate, login
 from .models import *
 
 def homepage(request):
-    print(request.user)
-    
     if request.user.is_authenticated:
         user=request.user.username
     else:
@@ -16,7 +14,10 @@ def homepage(request):
         post = get_object_or_404(Post, pk=request.POST['post'])
         post.votes += 1
         post.save()
-    post_list = Post.objects.all()
+    
+    post_list = list(Post.objects.all())
+    post_list = sorted(post_list, key=lambda x: x.votes, reverse=True)
+
     context = {'post_list': post_list, 'user': user}
     return render(request, 'nonnas/homepage.html', context)
 
