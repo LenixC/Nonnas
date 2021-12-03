@@ -61,14 +61,17 @@ def login_request(request):
                   {"form":form})
 
 def new_post(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            title = form.cleaned_data['title']
-            content = form.cleaned_data['content']
-            post = Post.objects.create(title = title,
-                                       content = content,)
-            return redirect("nonnas:homepage")
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = PostForm(request.POST)
+            if form.is_valid():
+                title = form.cleaned_data['title']
+                content = form.cleaned_data['content']
+                post = Post.objects.create(title = title,
+                                           content = content,)
+                return redirect("nonnas:homepage")
+    else:
+        print("You must log in to make a post")
 
     form = PostForm()
     return render(request,
