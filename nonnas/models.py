@@ -13,3 +13,13 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content']
+
+class Comment(models.Model):
+    user = models.CharField(max_length=200)
+    content = models.TextField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']

@@ -3,7 +3,13 @@
 {% block content %}
 	<div class="container">
 		<h1>{{ post.title }}: {{ post.votes }} votes</h1>
-		<p>{{ post.content}}</p>
-		<a href="/nonnas/">Go Back</a>
+		<h3>{{ post.content }}</h3>
+		
+		<div class = "container">
+			{% for comment in comment_list %}
+			<h5>{{ comment.user }} says </h5> <p> {{ comment.content }} </p>
+			{% endfor %}
+		</div>
 	</div>
+	<a href="/nonnas/{{ post.pk }}/post_comment/" class="btn-floating btn-large waves-effect waves-light red right">post comment</a>
 {% endblock %}

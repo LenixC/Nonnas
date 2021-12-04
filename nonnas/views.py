@@ -23,7 +23,9 @@ def homepage(request):
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    return render(request, 'nonnas/detail.html', {'post': post})
+    comment_list = post.comment_set.all()
+    return render(request, 'nonnas/detail.html', {'post': post,
+                                  'comment_list': comment_list})
 
 def register(request):
     if request.method == "POST":
@@ -77,4 +79,25 @@ def new_post(request):
     form = PostForm()
     return render(request,
                   "nonnas/new_post.html",
+                  {"form":form})
+
+def post_comment(request, post_id):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                user = request.user.username
+                content = form.cleaned_data['content']
+                post = Post.objects.get(pk=post_id)
+                comment = Comment.objects.create(user = user,
+                                           content = content,
+                                           post = post,)
+                redirect_tag = "/nonnas/" + str(post_id) + "/"
+                return redirect(redirect_tag)
+    else:
+        print("You must log in to make a post")
+
+    form = CommentForm()
+    return render(request,
+                  "nonnas/post_comment.html",
                   {"form":form})
